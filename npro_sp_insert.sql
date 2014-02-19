@@ -66,7 +66,7 @@ CREATE PROCEDURE InsertUserInfo(
 	UserName VARCHAR(100),
 	NickName VARCHAR(100),
 	Pwd VARCHAR(100),
-	Gender BOOL,
+	Gender SMALLINT,
 	DOB DATE, -- date of birth
 	ActiveStatus SMALLINT,
 	Address1 VARCHAR(100),

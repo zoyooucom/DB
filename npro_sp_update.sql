@@ -48,7 +48,7 @@ CREATE PROCEDURE UpdateUserInfo(
 	Pwd VARCHAR(100),
 	ActiveStatus SMALLINT,
 	NickName VARCHAR(100),
-	Gender BOOL,
+	Gender SMALLINT,
 	DOB DATE, -- date of birth
 	Address1 VARCHAR(100),
 	Address2 VARCHAR(100),
