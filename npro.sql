@@ -372,6 +372,10 @@ CREATE TABLE IF NOT EXISTS `NPro`.`BusinessCommunityRelationship` (
 CREATE TABLE IF NOT EXISTS `NPro`.`Map` (
   `MapID` BIGINT NOT NULL AUTO_INCREMENT,
   `MapInfo` TEXT NOT NULL,
+  `District` VARCHAR(100) NULL,
+  `City` VARCHAR(100) NULL,
+  `Province` VARCHAR(100) NULL, 
+  `Description` VARCHAR(400) NULL, 
   `CreateDate` DATETIME NOT NULL,
   `CreateBy` VARCHAR(100) NOT NULL,
   `LastModifiedDate` DATETIME NOT NULL,
