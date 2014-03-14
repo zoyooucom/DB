@@ -131,7 +131,7 @@ END //
 
 DROP PROCEDURE IF EXISTS InsertUserCommunityRelationship //
 
--- Stored procedure to insert user info
+-- Stored procedure to insert user community relationship
 CREATE PROCEDURE InsertUserCommunityRelationship(
 	UID BIGINT,
 	CommunityID BIGINT,
@@ -161,4 +161,62 @@ BEGIN
 	);
 
 	SELECT LAST_INSERT_ID() INTO UserCommunityRelationshipID;
+END //
+
+DROP PROCEDURE IF EXISTS InsertCommunityInfo //
+
+-- Stored procedure to insert community info
+CREATE PROCEDURE InsertCommunityInfo(
+	CommunityName VARCHAR(100),
+	ActiveStatus SMALLINT,
+	MapID BIGINT,
+    OUT CommunityID BIGINT)
+BEGIN
+
+	SET @Now = NOW();
+	SET @Creator = "LiYang";
+	
+	INSERT INTO Community
+	(`Name`,
+	  ActiveStatus,
+	  MapID)
+	VALUE
+	(CommunityName,
+		ActiveStatus,
+		MapID
+	);
+
+	SELECT LAST_INSERT_ID() INTO CommunityID;
+END //
+
+DROP PROCEDURE IF EXISTS InsertMapInfo //
+
+-- Stored procedure to insert map info
+CREATE PROCEDURE InsertMapInfo(
+	MapInfo TEXT,
+	District VARCHAR(100),
+    City VARCHAR(100),
+    Province VARCHAR(100), 
+    Description VARCHAR(400), 
+    OUT MapID BIGINT)
+BEGIN
+
+	SET @Now = NOW();
+	SET @Creator = "LiYang";
+	
+	INSERT INTO Map
+	(MapInfo,
+	 District,
+     City,
+     Province, 
+     Description)
+	VALUE
+	(MapInfo,
+		District,
+		City,
+		Province, 
+		Description
+	);
+
+	SELECT LAST_INSERT_ID() INTO MapID;
 END //

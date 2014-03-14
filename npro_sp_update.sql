@@ -96,3 +96,27 @@ BEGIN
 		u.LastModifiedBy = @Creator
 	WHERE u.UID = UserID;
 END //
+
+
+DROP PROCEDURE IF EXISTS UpdateCommunityInfo //
+
+-- Stored procedure to update community info
+CREATE PROCEDURE UpdateCommunityInfo(
+	CommunityID BIGINT,
+	CommunityName VARCHAR(100),
+	ActiveStatus SMALLINT,
+	MapID BIGINT)
+BEGIN
+
+	SET @Now = NOW();
+	SET @Creator = "LiYang";
+	
+	UPDATE Community c
+	SET 
+		c.`Name` = CommunityName,
+		c.ActiveStatus = ActiveStatus,
+		c.MapID = MapID,
+		c.LastModifiedDate = @Now,
+		c.LastModifiedBy = @Creator
+	WHERE c.CommunityID = CommunityID;
+END //
