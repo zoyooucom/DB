@@ -44,16 +44,21 @@ END //
 DROP PROCEDURE IF EXISTS DeleteUserCommunityRelationship //
 
 -- Stored procedure to delete user community relationship
-CREATE PROCEDURE DeleteUserCommunityRelationship(UserCommunityRelationshipID BIGINT)
+CREATE PROCEDURE DeleteUserCommunityRelationship(
+	UserID BIGINT,
+	CommunityID BIGINT)
 BEGIN
 	SET @Now = NOW();
 	SET @Creator = "LiYang";
-	/*
+	
 	SELECT ActiveID INTO @DeletedStatus
 	FROM ActiveStatus a
 	WHERE a.ActiveStatusName = "Deleted";
-	*/
+	
 
-	DELETE FROM UserCommunityRelationship
-	WHERE ID = UserCommunityRelationshipID;
+	UPDATE UserCommunityRelationship ucr
+	SET ucr.ActiveStatus = @DeletedStatus,
+		ucr.LastModifiedDate = @Now,
+		ucr.LastModifiedBy = @Creator
+	WHERE ucr.UID = UserID AND ucr.CommunityID = CommunityID;
 END //

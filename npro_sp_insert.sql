@@ -136,16 +136,18 @@ CREATE PROCEDURE InsertUserCommunityRelationship(
 	UID BIGINT,
 	CommunityID BIGINT,
     RoleID SMALLINT,
+    ActiveStatus SMALLINT,
 	OUT UserCommunityRelationshipID BIGINT)
 BEGIN
 
 	SET @Now = NOW();
 	SET @Creator = "LiYang";
-	
+
 	INSERT INTO UserCommunityRelationship
 	(UID,
 	  CommunityID,
 	  RoleID,
+	  ActiveStatus,
 	  CreateDate,
 	  CreateBy,
 	  LastModifiedDate,
@@ -154,6 +156,7 @@ BEGIN
 	(UID,
 		CommunityID,
 		RoleID,
+		ActiveStatus,
 		@Now,
 		@Creator,
 		@Now,
@@ -179,11 +182,19 @@ BEGIN
 	INSERT INTO Community
 	(`Name`,
 	  ActiveStatus,
-	  MapID)
+	  MapID,
+	  CreateDate,
+	  CreateBy,
+	  LastModifiedDate,
+	  LastModifiedBy)
 	VALUE
 	(CommunityName,
 		ActiveStatus,
-		MapID
+		MapID,
+		@Now,
+		@Creator,
+		@Now,
+		@Creator
 	);
 
 	SELECT LAST_INSERT_ID() INTO CommunityID;
@@ -209,13 +220,21 @@ BEGIN
 	 District,
      City,
      Province, 
-     Description)
+     Description,
+	 CreateDate,
+	 CreateBy,
+	 LastModifiedDate,
+	 LastModifiedBy)
 	VALUE
 	(MapInfo,
 		District,
 		City,
 		Province, 
-		Description
+		Description,
+		@Now,
+		@Creator,
+		@Now,
+		@Creator
 	);
 
 	SELECT LAST_INSERT_ID() INTO MapID;
