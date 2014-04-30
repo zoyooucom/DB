@@ -264,7 +264,6 @@ CREATE TABLE IF NOT EXISTS `NPro`.`UserCommunityRelationship` (
   `UID` BIGINT NOT NULL,
   `CommunityID` BIGINT NOT NULL,
   `RoleID` SMALLINT NOT NULL,
-  `ActiveStatus` SMALLINT NOT NULL,
   `CreateDate` DATETIME NOT NULL,
   `CreateBy` VARCHAR(100) NOT NULL,
   `LastModifiedDate` DATETIME NOT NULL,
@@ -272,11 +271,6 @@ CREATE TABLE IF NOT EXISTS `NPro`.`UserCommunityRelationship` (
   PRIMARY KEY (`ID`),
   INDEX `IX_UserCommunityRelationship` (`UID` ASC),
   INDEX `IX_UserCommunityRelationship_1` (`CommunityID` ASC),
-  CONSTRAINT `FK_UserCommunityRelationship_ActiveStatus`
-    FOREIGN KEY (`ActiveStatus`)
-    REFERENCES `NPro`.`ActiveStatus` (`ActiveID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `FK_UserCommunityRelationship_Role`
     FOREIGN KEY (`RoleID`)
     REFERENCES `NPro`.`Role` (`RoleID`)
